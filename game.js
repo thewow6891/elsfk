@@ -180,6 +180,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 20); // 每20毫秒检查一次是否需要移动角色
 
+    // 新增: 检测是否在移动端打开
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    const mobileControls = document.getElementById('mobile-controls');
+    const leftControl = document.getElementById('left-control');
+    const rightControl = document.getElementById('right-control');
+
+    if (isMobile) {
+        mobileControls.style.display = 'block';
+    }
+
+    // 新增: 添加移动端控制按钮的事件监听器
+    leftControl.addEventListener('touchstart', function(e) {
+        if (!isGameOver) {
+            movePlayer(-10);
+        }
+    });
+
+    rightControl.addEventListener('touchstart', function(e) {
+        if (!isGameOver) {
+            movePlayer(10);
+        }
+    });
+
     function movePlayer(direction) {
         if (isGameOver) return; // 如果游戏结束，阻止移动
         const left = parseInt(player.style.left) || 0;
