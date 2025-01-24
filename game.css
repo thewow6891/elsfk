@@ -65,6 +65,7 @@ body, html {
     bottom: 100px;
     width: 100%;
     overflow: hidden;
+    position: relative; /* 添加相对定位 */
 }
 
 .player {
@@ -116,4 +117,29 @@ body, html {
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+#mobile-controls {
+    position: absolute;
+    bottom: 20px; /* 距离底部20px */
+    width: 100%;
+    text-align: center;
+}
+
+.control {
+    width: 50px;
+    height: 50px;
+    margin: 0 20px; /* 控制按钮之间的间距 */
+}
+
+#left-control {
+    position: absolute;
+    left: 20px; /* 距离左边20px */
+    bottom: 20px; /* 距离底部20px */
+}
+
+#right-control {
+    position: absolute;
+    right: 20px; /* 距离右边20px */
+    bottom: 20px; /* 距离底部20px */
 }
