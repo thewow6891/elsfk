@@ -144,14 +144,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('touchstart', function(e) {
         if (!isGameOver) { // 只有在游戏未结束时才允许移动
             touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY; // 新增: 记录触摸开始时的Y坐标
         }
     });
 
     document.addEventListener('touchmove', function(e) {
         if (!isGameOver) { // 只有在游戏未结束时才允许移动
             touchMoveX = e.touches[0].clientX;
-            const direction = touchMoveX - touchStartX;
-            movePlayer(direction / 10); // 根据触摸移动的距离来移动角色
+            touchMoveY = e.touches[0].clientY; // 新增: 记录触摸移动时的Y坐标
+            const directionX = touchMoveX - touchStartX;
+            const directionY = touchMoveY - touchStartY; // 新增: 计算触摸移动的Y方向距离
+
+            // 新增: 只有当Y方向移动距离小于某个阈值时才处理X方向移动
+            if (Math.abs(directionY) < 10) {
+                movePlayer(directionX / 10); // 根据触摸移动的距离来移动角色
+            }
         }
     });
 
@@ -159,6 +166,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isGameOver) { // 只有在游戏未结束时才允许移动
             touchStartX = 0;
             touchMoveX = 0;
+            touchStartY = 0; // 新增: 重置触摸开始时的Y坐标
+            touchMoveY = 0; // 新增: 重置触摸移动时的Y坐标
         }
     });
 
