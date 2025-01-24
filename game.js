@@ -122,11 +122,29 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isGameOver) { // 只有在游戏未结束时才允许移动
             if (e.key === 'ArrowLeft') {
                 movePlayer(-10);
+                player.classList.add('moving-left'); // 添加移动状态类
             } else if (e.key === 'ArrowRight') {
                 movePlayer(10);
+                player.classList.add('moving-right'); // 添加移动状态类
             }
         }
     });
+
+    document.addEventListener('keyup', function(e) {
+        if (e.key === 'ArrowLeft') {
+            player.classList.remove('moving-left'); // 移除移动状态类
+        } else if (e.key === 'ArrowRight') {
+            player.classList.remove('moving-right'); // 移除移动状态类
+        }
+    });
+
+    setInterval(function() {
+        if (player.classList.contains('moving-left')) {
+            movePlayer(-10);
+        } else if (player.classList.contains('moving-right')) {
+            movePlayer(10);
+        }
+    }, 20); // 每20毫秒检查一次是否需要移动角色
 
     function movePlayer(direction) {
         if (isGameOver) return; // 如果游戏结束，阻止移动
