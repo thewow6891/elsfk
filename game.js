@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let isGameOver = false; // 新增变量，用于标记游戏是否结束
     let retryCount = 0; // 新增变量，用于记录玩家点击“再来”按钮的次数
     let totalScore = 0; // 新增变量，用于记录累计福气值
+    let touchStartX = 0; // 新增变量，用于记录触摸开始时的X坐标
+    let touchMoveX = 0; // 新增变量，用于记录触摸移动时的X坐标
 
     function createFallingItem() {
         const items = ['yuanbao', 'hongbao', 'fudai', 'jintiao', 'zhuanshi', 'zhihongbao', 'dahongbao', 'bomb'];
@@ -135,6 +137,28 @@ document.addEventListener('DOMContentLoaded', function() {
             player.classList.remove('moving-left'); // 移除移动状态类
         } else if (e.key === 'ArrowRight') {
             player.classList.remove('moving-right'); // 移除移动状态类
+        }
+    });
+
+    // 新增触摸事件监听器
+    document.addEventListener('touchstart', function(e) {
+        if (!isGameOver) { // 只有在游戏未结束时才允许移动
+            touchStartX = e.touches[0].clientX;
+        }
+    });
+
+    document.addEventListener('touchmove', function(e) {
+        if (!isGameOver) { // 只有在游戏未结束时才允许移动
+            touchMoveX = e.touches[0].clientX;
+            const direction = touchMoveX - touchStartX;
+            movePlayer(direction / 10); // 根据触摸移动的距离来移动角色
+        }
+    });
+
+    document.addEventListener('touchend', function(e) {
+        if (!isGameOver) { // 只有在游戏未结束时才允许移动
+            touchStartX = 0;
+            touchMoveX = 0;
         }
     });
 
