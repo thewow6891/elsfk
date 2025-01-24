@@ -69,7 +69,7 @@ body, html {
 }
 
 .player {
-    position: absolute;
+    position: fixed;
     bottom: 0; /* 确保玩家角色在屏幕底部 */
     left: 50%;
     transform: translateX(-50%);
