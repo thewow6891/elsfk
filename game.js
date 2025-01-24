@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileControls.style.display = 'block';
     }
 
-    // 新增: 添加移动端控制按钮的事件监听器
+    // 确保移动端控制按钮的事件监听器正确添加
     leftControl.addEventListener('touchstart', function(e) {
         if (!isGameOver) {
             movePlayer(-10);
