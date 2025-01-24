@@ -1,0 +1,32 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+#welcome-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.start-game-btn {
+    position: absolute;
+    bottom: 20%;
+    background-color: red; /* 修改为红色 */
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    cursor: pointer;
+}

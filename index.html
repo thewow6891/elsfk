@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>接福游戏</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div id="welcome-container">
+        <img src="image/welcome_background.jpeg" alt="Welcome Background" class="welcome-background">
+        <button id="start-game-btn" class="start-game-btn">开始接福</button>
+    </div>
+    <div id="game-container" style="display: none;">
+        <div id="top-bar">
+            <div id="score">福气值: 0</div>
+            <div id="timer">倒计时: 45s</div>
+        </div>
+        <div id="game-area">
+            <div id="player" class="player"></div>
+        </div>
+    </div>
+    <div id="modal" class="modal" style="display: none;"> <!-- 修改: 添加初始隐藏样式 -->
+        <div class="modal-content">
+            <h2>游戏结束</h2>
+            <p id="final-score">福气值: 0</p>
+            <button id="retry-btn" class="retry-btn">再来！</button>
+        </div>
+    </div>
+    <audio id="background-music" src="music/background_music.mp3" loop></audio>
+    <audio id="button-sound" src="music/button.mp3"></audio>
+    <audio id="bomb-sound" src="music/bomb.mp3"></audio>
+    <audio id="music1" src="music/music1.mp3"></audio>
+    <audio id="music2" src="music/music2.mp3"></audio>
+    <audio id="music3" src="music/music3.mp3"></audio>
+    <audio id="music4" src="music/music4.mp3"></audio>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+#welcome-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.start-game-btn {
+    position: absolute;
+    bottom: 20%;
+    background-color: #ff4500; /* 喜庆红色 */
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%; /* 无棱角圆形 */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* 立体感 */
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('image/game_background.jpeg');
+    background-size: cover;
+    overflow: hidden;
+}
+
+#top-bar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#score, #timer {
+    font-size: 20px;
+}
+
+#game-area {
+    position: absolute;
+    top: 50px;
+    bottom: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.player {
+    position: absolute;
+    bottom: 0; /* 确保玩家角色在屏幕底部 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 203px;
+    background-image: url('image/user.png');
+    background-size: cover;
+}
+
+.falling-item {
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+}
+
+.modal {
+    display: flex; /* 确保 modal 使用 flex 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    margin: auto; /* 确保 modal-content 在 modal 中居中 */
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 290px
+}
+
+.retry-btn {
+    background-color: #ffcc00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
