@@ -70,8 +70,8 @@ body, html {
 
 .player {
     position: fixed;
-    bottom: 0; /* 确保玩家角色在屏幕底部 */
-    left: 50%;
+   /* bottom: 0;  确保玩家角色在屏幕底部 
+    left: 50%;*/
     transform: translateX(-50%);
     width: 120px;
     height: 203px;
