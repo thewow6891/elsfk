@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isGameOver) { // 只有在游戏未结束时才允许移动
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY; // 新增: 记录触摸开始时的Y坐标
+            movePlayer(0); // 立即调用 movePlayer 函数，初始移动距离为0
         }
     });
 
