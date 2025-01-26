@@ -93,6 +93,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 endGame();
             }
         }, 500); // 修改: 将时间间隔从1000毫秒改为500毫秒
+
+        // 新增: 启动一个定时器来持续移动角色
+        setInterval(function() {
+            movePlayer(0); // 默认情况下不移动，但可以在这里添加逻辑来控制角色的默认移动方向
+        }, 20); // 每20毫秒检查一次是否需要移动角色
     }
 
     function endGame() {
@@ -120,65 +125,31 @@ document.addEventListener('DOMContentLoaded', function() {
         retryCount++; // 增加点击次数
     });
 
+    function movePlayer(direction) {
+        if (isGameOver) return; // 如果游戏结束，阻止移动
+        const left = parseInt(player.style.left) || 0;
+        const newLeft = left + direction;
+        const minLeft = -player.offsetWidth / 2 + 110; // 修改: 增加左边的移动范围90px，原来为40px，现在为130px
+        const maxLeft = gameArea.offsetWidth - player.offsetWidth / 2 + 10; // 减少右边的移动范围20px，原来为90px，现在为70px，进一步调整为110px
+
+        player.style.left = Math.max(minLeft, Math.min(newLeft, maxLeft)) + 'px';
+        player.style.bottom = '0'; // 确保玩家角色在屏幕底部
+    }
+
+    // 新增: 添加键盘事件监听器
     document.addEventListener('keydown', function(e) {
-        if (!isGameOver) { // 只有在游戏未结束时才允许移动
-            if (e.key === 'ArrowLeft') {
-                movePlayer(-10);
-                player.classList.add('moving-left'); // 添加移动状态类
-            } else if (e.key === 'ArrowRight') {
-                movePlayer(10);
-                player.classList.add('moving-right'); // 添加移动状态类
-            }
+        if (e.key === 'ArrowLeft') {
+            movePlayer(-5); // 向左移动
+        } else if (e.key === 'ArrowRight') {
+            movePlayer(5); // 向右移动
         }
     });
 
     document.addEventListener('keyup', function(e) {
-        if (e.key === 'ArrowLeft') {
-            player.classList.remove('moving-left'); // 移除移动状态类
-        } else if (e.key === 'ArrowRight') {
-            player.classList.remove('moving-right'); // 移除移动状态类
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            movePlayer(0); // 停止移动
         }
     });
-
-    // 新增触摸事件监听器
-    document.addEventListener('touchstart', function(e) {
-        if (!isGameOver) { // 只有在游戏未结束时才允许移动
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY; // 新增: 记录触摸开始时的Y坐标
-            movePlayer(0); // 立即调用 movePlayer 函数，初始移动距离为0
-        }
-    });
-
-    document.addEventListener('touchmove', function(e) {
-        if (!isGameOver) { // 只有在游戏未结束时才允许移动
-            touchMoveX = e.touches[0].clientX;
-            touchMoveY = e.touches[0].clientY; // 新增: 记录触摸移动时的Y坐标
-            const directionX = touchMoveX - touchStartX;
-            const directionY = touchMoveY - touchStartY; // 新增: 计算触摸移动的Y方向距离
-
-            // 新增: 只有当Y方向移动距离小于某个阈值时才处理X方向移动
-            if (Math.abs(directionY) < 10) {
-                movePlayer(directionX / 10); // 根据触摸移动的距离来移动角色
-            }
-        }
-    });
-
-    document.addEventListener('touchend', function(e) {
-        if (!isGameOver) { // 只有在游戏未结束时才允许移动
-            touchStartX = 0;
-            touchMoveX = 0;
-            touchStartY = 0; // 新增: 重置触摸开始时的Y坐标
-            touchMoveY = 0; // 新增: 重置触摸移动时的Y坐标
-        }
-    });
-
-    setInterval(function() {
-        if (player.classList.contains('moving-left')) {
-            movePlayer(-10);
-        } else if (player.classList.contains('moving-right')) {
-            movePlayer(10);
-        }
-    }, 20); // 每20毫秒检查一次是否需要移动角色
 
     // 新增: 检测是否在移动端打开
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
@@ -193,26 +164,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // 确保移动端控制按钮的事件监听器正确添加
     leftControl.addEventListener('touchstart', function(e) {
         if (!isGameOver) {
-            movePlayer(-10);
+            player.classList.add('moving-left'); // 添加移动状态类
+        }
+    });
+
+    leftControl.addEventListener('touchend', function(e) {
+        if (!isGameOver) {
+            player.classList.remove('moving-left'); // 移除移动状态类
         }
     });
 
     rightControl.addEventListener('touchstart', function(e) {
         if (!isGameOver) {
-            movePlayer(10);
+            player.classList.add('moving-right'); // 添加移动状态类
         }
     });
 
-    function movePlayer(direction) {
-        if (isGameOver) return; // 如果游戏结束，阻止移动
-        const left = parseInt(player.style.left) || 0;
-        const newLeft = left + direction;
-        const minLeft = -player.offsetWidth / 2 + 110; // 修改: 增加左边的移动范围90px，原来为40px，现在为130px
-        const maxLeft = gameArea.offsetWidth - player.offsetWidth / 2 + 10; // 减少右边的移动范围20px，原来为90px，现在为70px，进一步调整为110px
+    rightControl.addEventListener('touchend', function(e) {
+        if (!isGameOver) {
+            player.classList.remove('moving-right'); // 移除移动状态类
+        }
+    });
 
-        player.style.left = Math.max(minLeft, Math.min(newLeft, maxLeft)) + 'px';
-        player.style.bottom = '0'; // 确保玩家角色在屏幕底部
-    }
+    // 确保角色在游戏开始时位于屏幕中央
+    player.style.left = '50%';
+    player.style.transform = 'translateX(-50%)';
 
     const startGameBtn = document.getElementById('start-game-btn');
     startGameBtn.addEventListener('click', function() {

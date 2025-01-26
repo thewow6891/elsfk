@@ -60,18 +60,17 @@ body, html {
 }
 
 #game-area {
-    position: absolute;
+    position: absolute; /* 确保只定义一次 position 属性 */
     top: 50px;
     bottom: 100px;
     width: 100%;
     overflow: hidden;
-    position: relative; /* 添加相对定位 */
 }
 
 .player {
     position: fixed;
-   /* bottom: 0;  确保玩家角色在屏幕底部 
-    left: 50%;*/ 
+    bottom: 0; /*  确保玩家角色在屏幕底部 */
+    left: 50%;
     transform: translateX(-50%);
     width: 120px;
     height: 203px;
