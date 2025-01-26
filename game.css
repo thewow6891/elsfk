@@ -69,8 +69,8 @@ body, html {
 
 .player {
     position: fixed;
-    bottom: 0; /*  确保玩家角色在屏幕底部 */
-    left: 50%;
+   /* bottom: 0;   确保玩家角色在屏幕底部
+    left: 50%; */
     transform: translateX(-50%);
     width: 120px;
     height: 203px;
@@ -132,13 +132,13 @@ body, html {
 }
 
 #left-control {
-    position: absolute;
-    left: 20px; /* 距离左边20px */
-    bottom: 20px; /* 距离底部20px */
+    position: fixed;
+    left: -5px; /* 距离左边20px */
+    bottom: 80px; /* 距离底部20px */
 }
 
 #right-control {
-    position: absolute;
-    right: 20px; /* 距离右边20px */
-    bottom: 20px; /* 距离底部20px */
+    position: fixed;
+    right: -5px; /* 距离右边20px */
+    bottom: 80px; /* 距离底部20px */
 }

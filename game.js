@@ -154,37 +154,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // 新增: 检测是否在移动端打开
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
     const mobileControls = document.getElementById('mobile-controls');
-    const leftControl = document.getElementById('left-control');
-    const rightControl = document.getElementById('right-control');
 
     if (isMobile) {
         mobileControls.style.display = 'block';
     }
-
-    // 确保移动端控制按钮的事件监听器正确添加
-    leftControl.addEventListener('touchstart', function(e) {
-        if (!isGameOver) {
-            player.classList.add('moving-left'); // 添加移动状态类
-        }
-    });
-
-    leftControl.addEventListener('touchend', function(e) {
-        if (!isGameOver) {
-            player.classList.remove('moving-left'); // 移除移动状态类
-        }
-    });
-
-    rightControl.addEventListener('touchstart', function(e) {
-        if (!isGameOver) {
-            player.classList.add('moving-right'); // 添加移动状态类
-        }
-    });
-
-    rightControl.addEventListener('touchend', function(e) {
-        if (!isGameOver) {
-            player.classList.remove('moving-right'); // 移除移动状态类
-        }
-    });
 
     // 确保角色在游戏开始时位于屏幕中央
     player.style.left = '50%';
